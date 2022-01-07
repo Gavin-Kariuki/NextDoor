@@ -10,7 +10,7 @@ from .forms import *
 # Create your views here.
 
 @login_required(login_url='accounts/login/')
-def index(request):
+def home_page(request):
     try:
         mtaa = Neighbour.objects.all()
     except Exception as e:
