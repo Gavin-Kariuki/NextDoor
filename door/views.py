@@ -60,4 +60,24 @@ def new_post(request):
         form = PostForm()
     return render(request, "new_post.html", {"form": form})
 
+@login_required(login_url='accounts/login/')
+def new_business(request):
+    user = User.objects.filter(id = request.user.id).first()
+    profile = Profile.objects.filter(user = user).first()
+    if request.method == "POST":
+        business_form = BusinessForm(request.POST, request.FILES)
+        if business_form.is_valid():
+            business = Business(name = request.POST['name'], neighbourhood = profile.neighbourhood)
+            business.save()
+        return redirect('business')
+    else:
+        business_form = BusinessForm()
+    return render(request, "new_biz.html", {"business": business_form})
+
+@login_required
+def logout(request):
+    django_logout(request)
+    return  HttpResponseRedirect('/')
+
+
 
