@@ -46,3 +46,29 @@ class Post(models.Model):
 
     def delete_post(self):
         self.delete()
+
+class Business(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE, blank=True)
+    name = models.CharField(max_length=60, null=True)
+    description = models.CharField(max_length=400, null=True)
+    neighbourhood = models.ForeignKey(Neighbour, on_delete=models.CASCADE)
+    email = models.EmailField()
+
+    def __str__(self):
+        return self.name
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    bio = models.TextField(max_length=300, blank=True)
+    image = CloudinaryField('image')
+    neighbourhood = models.ForeignKey(Neighbour, on_delete=models.SET_NULL, null=True, related_name='users')
+
+
+    def __str__(self):
+        return f'{self.user.username} profile'
