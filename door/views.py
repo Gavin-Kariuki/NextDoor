@@ -72,7 +72,7 @@ def new_business(request):
         return redirect('business')
     else:
         business_form = BusinessForm()
-    return render(request, "new_biz.html", {"business": business_form})
+    return render(request, "new_business.html", {"business": business_form})
 
 @login_required
 def logout(request):
