@@ -33,7 +33,7 @@ class Neighbour(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField(max_length=500)
-    post_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_by = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     neighbourhood = models.ForeignKey(Neighbour, on_delete=models.CASCADE)
     posted_on = models.DateTimeField(auto_now_add=True)
     image = CloudinaryField('image')

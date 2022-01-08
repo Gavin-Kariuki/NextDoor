@@ -52,7 +52,7 @@ def new_post(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit = False)
-            post.hood = request.user.profile.neighbourhood
+            post.neighbourhood = request.user.profile.neighbourhood
             post.posted_by = request.user
             post.save()
             return redirect("post")
